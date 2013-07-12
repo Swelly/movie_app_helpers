@@ -10,3 +10,8 @@
 
 <h2>Cast</h2>
 <% render partial: 'cast', locals: { :movie => @movie } %>
+
+<form action="/movies/<%= @movie.id %>/delete" method="get">
+  <input type="hidden" name="_method" value="destroy">
+  <button>Delete Movie</button>
+</form>

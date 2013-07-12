@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
     @movie.rating = 100 if params[:fave]
     @movie.save
     imdb.cast_members.each do |name|
-      actor = Actor.create_or_find_by(:name => name)
+      actor = Actor.find_or_create_by_name(:name => name)
       @movie.actors << actor
     end
     redirect_to '/movies'
@@ -41,6 +41,12 @@ class MoviesController < ApplicationController
     end
     movie.save
     redirect_to movie
+  end
+
+  def destroy
+    movie = Movie.find(params[:id])
+    movie.destroy
+    redirect_to('/movies')
   end
 
 end
